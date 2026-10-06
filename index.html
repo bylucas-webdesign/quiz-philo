@@ -62,206 +62,350 @@
 
     <script>
         const masterQuizData = [
-            // Définitions & Notions de base
+            // --- SECTION 1 : NOTIONS & DÉFINITIONS GÉNÉRALES ---
             {
                 category: "Définition vers Notion",
-                question: "Quelle notion correspond à 'la capacité de se rendre compte de son existence, de penser et de prendre conscience de ses propres pensées' ?",
+                question: "Quelle notion correspond à 'la capacité de se rendre compte de son existence, de penser et de prendre conscience de ses propres pensées'[cite: 1]?",
                 options: [
-                    { text: "La conscience", isCorrect: true, rationale: "Exact ! C'est la définition fondamentale de la conscience selon les fiches." },
-                    { text: "La subjectivité", isCorrect: false, rationale: "Non, la subjectivité désigne plutôt la manière dont un individu perçoit le monde à partir de son point de vue." },
-                    { text: "Le cogito", isCorrect: false, rationale: "Non, le cogito est la première vérité certaine chez Descartes ('Je pense donc je suis')." },
-                    { text: "Le transcendantal", isCorrect: false, rationale: "Non, chez Kant, le transcendantal concerne les conditions rendant possible notre expérience." }
+                    { text: "La conscience", isCorrect: true, rationale: "Exact ! C'est la définition fondamentale de la conscience[cite: 1]." },
+                    { text: "La subjectivité", isCorrect: false, rationale: "Non, la subjectivité désigne la perception du monde à partir de son propre point de vue[cite: 2]." },
+                    { text: "Le cogito", isCorrect: false, rationale: "Non, le cogito est la première vérité cartésienne[cite: 4]." },
+                    { text: "Le transcendantal", isCorrect: false, rationale: "Non, chez Kant, cela concerne les conditions de l'expérience[cite: 4]." }
+                ]
+            },
+            {
+                category: "Définition vers Notion",
+                question: "Qu'est-ce que la 'conscience de soi' selon les fiches[cite: 1]?",
+                options: [
+                    { text: "La capacité à savoir que l'on existe en tant que sujet, permettant de se reconnaître comme un « je »[cite: 1].", isCorrect: true, rationale: "Parfait ! Elle permet aussi de prendre soi-même comme objet de réflexion[cite: 1]." },
+                    { text: "La capacité à distinguer le bien du mal et à juger ses propres actions[cite: 1].", isCorrect: false, rationale: "C'est la conscience morale[cite: 1]." },
+                    { text: "Le fait de pouvoir répondre de ses actes[cite: 4].", isCorrect: false, rationale: "C'est la définition de la responsabilité[cite: 4]." },
+                    { text: "L'unification de toutes nos expériences dans un même « je »[cite: 4].", isCorrect: false, rationale: "C'est le rôle de la conscience chez Kant[cite: 4, 8]." }
                 ]
             },
             {
                 category: "Notion vers Définition",
-                question: "Que désigne précisément la 'conscience morale' d'après les fiches ?",
+                question: "Que désigne précisément la 'conscience morale'[cite: 1]?",
                 options: [
-                    { text: "La capacité à distinguer le bien du mal et à juger ses propres actions.", isCorrect: true, rationale: "Parfait ! Elle permet de savoir si ce que l'on fait est moralement bien ou mal." },
-                    { text: "La capacité à se reconnaître comme un « je » et sujet de réflexion.", isCorrect: false, rationale: "C'est la définition de la conscience de soi." },
-                    { text: "Le fait de pouvoir répondre de ses actes juridiquement.", isCorrect: false, rationale: "Bien que lié à la responsabilité, la conscience morale se définit par le discernement du bien et du mal." },
-                    { text: "L'unification de toutes nos expériences dans un même moi.", isCorrect: false, rationale: "C'est le rôle attribué à la conscience par Kant." }
+                    { text: "La capacité à distinguer le bien du mal et à juger ses propres actions[cite: 1].", isCorrect: true, rationale: "Exact ! Elle permet de savoir si ce que l'on fait est moralement bien ou mal[cite: 1]." },
+                    { text: "La capacité à se reconnaître comme un « je »[cite: 1].", isCorrect: false, rationale: "C'est la conscience de soi[cite: 1]." },
+                    { text: "La manière dont un individu perçoit et pense le monde à partir de son point de vue[cite: 2].", isCorrect: false, rationale: "C'est la subjectivité[cite: 2]." },
+                    { text: "Le fait d'unifier une multiplicité d'expériences[cite: 4].", isCorrect: false, rationale: "C'est l'approche transcendantale[cite: 4]." }
                 ]
             },
             {
                 category: "Définition vers Notion",
-                question: "Qu'est-ce que la 'subjectivité' selon le cours ?",
+                question: "Qu'est-ce que la 'subjectivité'[cite: 2]?",
                 options: [
-                    { text: "La manière dont un individu perçoit et pense le monde à partir de son propre point de vue (expérience personnelle).", isCorrect: true, rationale: "Exact ! C'est l'expérience personnelle que chacun a du monde." },
-                    { text: "La faculté de distinguer le bien du mal et de juger ses propres actions.", isCorrect: false, rationale: "C'est la conscience morale." },
-                    { text: "Une idée ou une image mentale que l'on se fait de quelque chose.", isCorrect: false, rationale: "C'est la définition d'une représentation." },
-                    { text: "Le fait de pouvoir répondre de ses actes.", isCorrect: false, rationale: "C'est la responsabilité." }
+                    { text: "La manière dont un individu perçoit et pense le monde à partir de son propre point de vue (expérience personnelle)[cite: 2].", isCorrect: true, rationale: "Exact ! C'est l'expérience propre de chacun[cite: 2]." },
+                    { text: "Une idée ou une image mentale que l'on se fait de quelque chose[cite: 2].", isCorrect: false, rationale: "C'est la définition d'une représentation[cite: 2]." },
+                    { text: "Le fait d'être une seule et même personne à travers le temps[cite: 4].", isCorrect: false, rationale: "C'est l'identité[cite: 4]." },
+                    { text: "L'ensemble des croyances issues du sens commun[cite: 5].", isCorrect: false, rationale: "C'est l'approche de Gramsci sur la philosophie spontanée[cite: 5]." }
+                ]
+            },
+            {
+                category: "Notion vers Définition",
+                question: "Qu'est-ce qu'une 'représentation' d'après le cours[cite: 2]?",
+                options: [
+                    { text: "Une idée ou une image mentale que l'on se fait de quelque chose[cite: 2].", isCorrect: true, rationale: "Parfait ! Grâce à elle, l'être humain peut se représenter le monde, les autres et lui-même[cite: 2]." },
+                    { text: "Un être capable de penser, de prendre conscience de lui-même et de dire « je »[cite: 2].", isCorrect: false, rationale: "C'est la définition du sujet[cite: 2]." },
+                    { text: "Une conception philosophique reposant sur deux principes distincts[cite: 2].", isCorrect: false, rationale: "C'est le dualisme[cite: 2]." },
+                    { text: "La méthode pour rechercher une vérité absolue[cite: 3].", isCorrect: false, rationale: "C'est le doute méthodique[cite: 3]." }
                 ]
             },
             {
                 category: "Définition vers Notion",
-                question: "Quelle notion désigne une idée ou une image mentale que l'on se fait de quelque chose ?",
+                question: "Qu'appelle-t-on un 'sujet' en philosophie[cite: 2]?",
                 options: [
-                    { text: "Une représentation", isCorrect: true, rationale: "Parfait ! Grâce à la conscience, l'être humain peut se représenter le monde, les autres et lui-même." },
-                    { text: "Le sujet", isCorrect: false, rationale: "Non, le sujet est un être capable de penser et de dire 'je'." },
-                    { text: "Le dualisme", isCorrect: false, rationale: "Non, c'est la conception reposant sur deux principes distincts." },
-                    { text: "L'identité", isCorrect: false, rationale: "Non, l'identité désigne le fait d'être une seule et même personne." }
-                ]
-            },
-            {
-                category: "Définition vers Notion",
-                question: "Qu'est-ce qu'un 'sujet' en philosophie ?",
-                options: [
-                    { text: "Un être capable de penser, de prendre conscience de lui-même et de dire « je ».", isCorrect: true, rationale: "Exact ! Il s'oppose à la simple chose qui ne possède pas cette conscience." },
-                    { text: "Une conception selon laquelle la réalité repose sur un seul principe.", isCorrect: false, rationale: "C'est la définition du monisme." },
-                    { text: "La méthode pour rechercher une vérité absolument certaine par le doute.", isCorrect: false, rationale: "C'est le doute méthodique." },
-                    { text: "Le fait d'être une seule et même personne malgré la diversité des expériences.", isCorrect: false, rationale: "C'est l'identité." }
+                    { text: "Un être capable de penser, de prendre conscience de lui-même et de dire « je »[cite: 2].", isCorrect: true, rationale: "Exact ! Il s'oppose à la simple chose qui ne possède pas cette conscience de soi[cite: 2]." },
+                    { text: "Une réalité matérielle appartenant exclusivement à la nature[cite: 2].", isCorrect: false, rationale: "C'est la définition du corps dans le dualisme cartésien[cite: 2]." },
+                    { text: "L'ensemble de nos expériences unifiées par la conscience[cite: 4].", isCorrect: false, rationale: "C'est la structure du « je » chez Kant[cite: 4, 8]." },
+                    { text: "Un individu soumis aux idées de son environnement social[cite: 5].", isCorrect: false, rationale: "C'est l'individu non critique décrit par Gramsci[cite: 5]." }
                 ]
             },
             {
                 category: "Distinction philosophique",
-                question: "Qu'appelle-t-on le 'dualisme' (notamment chez Descartes) ?",
+                question: "Qu'est-ce que le 'dualisme' (notamment chez Descartes)[cite: 2]?",
                 options: [
-                    { text: "Une conception où la réalité repose sur deux principes distincts : le corps (matériel) et l'esprit (pensant).", isCorrect: true, rationale: "Correct ! Le corps appartient à la nature et l'esprit est une réalité pensante." },
-                    { text: "Une conception reposant sur un seul principe ou une seule substance.", isCorrect: false, rationale: "C'est le monisme (Spinoza)." },
-                    { text: "Le fait de placer l'être humain au centre de la nature.", isCorrect: false, rationale: "C'est l'anthropocentrisme." },
-                    { text: "La condition qui rend possible notre expérience et notre connaissance.", isCorrect: false, rationale: "C'est le transcendantal chez Kant." }
+                    { text: "Une conception selon laquelle la réalité repose sur deux principes distincts : le corps matériel et l'esprit pensant[cite: 2].", isCorrect: true, rationale: "Correct ! Le corps appartient à la nature et l'esprit est une réalité pensante[cite: 2]." },
+                    { text: "Une conception reposant sur un seul principe ou une seule substance[cite: 3].", isCorrect: false, rationale: "C'est le monisme (Spinoza)[cite: 3, 10]." },
+                    { text: "Le fait de placer l'Homme au centre de la nature[cite: 3].", isCorrect: false, rationale: "C'est l'anthropocentrisme[cite: 3]." },
+                    { text: "La contradiction entre ce que l'on sait bien faire et nos actes réels[cite: 6].", isCorrect: false, rationale: "C'est le paradoxe moral chez Rousseau[cite: 6]." }
                 ]
             },
             {
                 category: "Distinction philosophique",
-                question: "Qu'est-ce que le 'monisme' (notamment chez Spinoza) par opposition au dualisme ?",
+                question: "Qu'est-ce que le 'monisme' (notamment chez Spinoza)[cite: 3]?",
                 options: [
-                    { text: "Une conception selon laquelle la réalité repose sur un seul principe ou une seule substance.", isCorrect: true, rationale: "Exact ! Chez Spinoza, l'Homme n'est pas séparé de la nature, il en fait partie." },
-                    { text: "La distinction rigoureuse entre le corps matériel et l'esprit pensant.", isCorrect: false, rationale: "C'est le dualisme cartésien." },
-                    { text: "L'obligation de douter méthodiquement de toutes nos connaissances.", isCorrect: false, rationale: "C'est le doute méthodique de Descartes." },
-                    { text: "La capacité d'unifier toutes nos expériences dans un même « je ».", isCorrect: false, rationale: "C'est la définition de la conscience unifiante chez Kant." }
+                    { text: "Une conception selon laquelle la réalité repose sur un seul principe ou une seule substance[cite: 3].", isCorrect: true, rationale: "Exact ! L'Homme n'est pas séparé de la nature, il en fait partie[cite: 3]." },
+                    { text: "La séparation absolue entre le corps et l'esprit[cite: 2].", isCorrect: false, rationale: "C'est le dualisme[cite: 2, 9]." },
+                    { text: "Le doute méthodique appliqué à toutes nos pensées[cite: 3].", isCorrect: false, rationale: "C'est la méthode de Descartes[cite: 3, 9]." },
+                    { text: "Le privilège divin et sacré accordé à la conscience[cite: 11].", isCorrect: false, rationale: "C'est la vision critiquée par Nietzsche[cite: 11]." }
                 ]
             },
             {
                 category: "Définition vers Notion",
-                question: "Qu'est-ce que l''anthropocentrisme' ?",
+                question: "Qu'est-ce que l''anthropocentrisme'[cite: 3]?",
                 options: [
-                    { text: "Une conception qui place l'être humain au centre et lui attribue une place privilégiée dans la nature.", isCorrect: true, rationale: "Parfait ! Elle est remise en question lorsque l'on réalise que l'Homme appartient lui-même à la nature." },
-                    { text: "Le fait que la conscience découle uniquement des échanges sociaux.", isCorrect: false, rationale: "C'est l'analyse de Nietzsche." },
-                    { text: "La capacité de répondre de ses actes.", isCorrect: false, rationale: "C'est la responsabilité." },
-                    { text: "La conscience de soi en tant que sujet unique.", isCorrect: false, rationale: "C'est l'identité." }
+                    { text: "Une conception qui place l'être humain au centre et lui attribue une place privilégiée dans la nature[cite: 3].", isCorrect: true, rationale: "Parfait ! Elle est remise en question quand on réalise que l'Homme appartient à la nature[cite: 3]." },
+                    { text: "Le fait que la conscience dérive des échanges et de la société[cite: 11].", isCorrect: false, rationale: "C'est l'origine sociale de la conscience selon Nietzsche[cite: 11]." },
+                    { text: "La capacité de répondre de ses actes devant autrui[cite: 4].", isCorrect: false, rationale: "C'est la responsabilité[cite: 4]." },
+                    { text: "La philosophie implicite contenue dans le sens commun[cite: 5].", isCorrect: false, rationale: "C'est l'analyse de Gramsci[cite: 5]." }
                 ]
             },
             {
                 category: "Notion vers Définition",
-                question: "En quoi consiste le 'doute méthodique' chez Descartes ?",
+                question: "En quoi consiste le 'doute méthodique' chez Descartes[cite: 3]?",
                 options: [
-                    { text: "Remettre volontairement en doute tout ce qui peut l'être afin de trouver une vérité indubitable.", isCorrect: true, rationale: "Correct ! C'est la méthode pour rechercher une vérité absolument certaine." },
-                    { text: "Accepter passivement toutes les idées issues de notre milieu social et du sens commun.", isCorrect: false, rationale: "C'est l'inverse, c'est ce que Gramsci critique." },
-                    { text: "Affirmer que le corps et l'esprit ne font qu'un dans la nature.", isCorrect: false, rationale: "C'est le monisme de Spinoza." },
-                    { text: "Douter de la moralité de ses propres actions.", isCorrect: false, rationale: "Cela relève de la conscience morale." }
+                    { text: "Remettre volontairement en doute tout ce qui peut l'être afin de trouver une vérité absolument certaine[cite: 3].", isCorrect: true, rationale: "Correct ! C'est l'outil indispensable pour découvrir le cogito[cite: 3, 4, 9]." },
+                    { text: "Douter systématiquement de l'existence de la société et des lois[cite: 6].", isCorrect: false, rationale: "Rousseau critique la société, mais le doute méthodique est purement cartésien[cite: 3, 6, 9]." },
+                    { text: "Accepter les croyances de son milieu social sans esprit critique[cite: 5].", isCorrect: false, rationale: "C'est l'inverse, c'est ce que Gramsci invite à dépasser[cite: 5]." },
+                    { text: "Considérer que l'Homme fait corps avec la nature[cite: 3].", isCorrect: false, rationale: "C'est la définition du monisme spinoziste[cite: 3, 10]." }
                 ]
             },
             {
                 category: "Notion vers Définition",
-                question: "Qu'est-ce que le 'cogito' chez Descartes ?",
+                question: "Qu'est-ce que le 'cogito' découvert par Descartes[cite: 4]?",
                 options: [
-                    { text: "La première vérité certaine : 'Je pense donc je suis' (le fait de penser prouve mon existence).", isCorrect: true, rationale: "Exact ! Même en doutant de tout, je ne peux pas douter du fait que je suis en train de penser." },
-                    { text: "La conscience morale permettant de distinguer le bien du mal.", isCorrect: false, rationale: "Non, le cogito est purement épistémologique et métaphysique (la certitude du sujet pensant)." },
-                    { text: "L'unification de toutes nos expériences sensibles.", isCorrect: false, rationale: "C'est le rôle du transcendantal chez Kant." },
-                    { text: "L'illusion d'une conscience divine ou sacrée.", isCorrect: false, rationale: "C'est la critique de Nietzsche." }
+                    { text: "La première vérité certaine : le fait de penser prouve mon existence (« Je pense donc je suis »)[cite: 4].", isCorrect: true, rationale: "Exact ! Même en doutant de tout, je ne peux douter du fait que je pense[cite: 4, 9]." },
+                    { text: "La capacité innée à distinguer le bien du mal[cite: 1].", isCorrect: false, rationale: "C'est la conscience morale[cite: 1]." },
+                    { text: "L'unification de la multiplicité des expériences dans un « je »[cite: 4].", isCorrect: false, rationale: "C'est la fonction transcendantale chez Kant[cite: 4, 8]." },
+                    { text: "L'illusion d'une conscience sacrée et divine[cite: 11].", isCorrect: false, rationale: "C'est la critique de Nietzsche[cite: 11]." }
                 ]
             },
             {
                 category: "Notion vers Définition",
-                question: "Que désigne le 'transcendantal' chez Kant ?",
+                question: "Que désigne le 'transcendantal' chez Kant[cite: 4]?",
                 options: [
-                    { text: "Ce qui concerne les conditions qui rendent possible notre expérience et notre connaissance (unifier la multiplicité dans un 'je').", isCorrect: true, rationale: "Parfait ! La conscience unifie toutes nos expériences diverses dans un même sujet." },
-                    { text: "La séparation radicale entre la matière corporelle et l'esprit.", isCorrect: false, rationale: "C'est le dualisme." },
-                    { text: "Le fait d'être un 'empire dans un empire' au-dessus de la nature.", isCorrect: false, rationale: "C'est l'illusion que combat Spinoza." },
-                    { text: "La pitié et la compassion naturelle chez l'Homme.", isCorrect: false, rationale: "Ce sont les sentiments évoqués par Rousseau." }
+                    { text: "Ce qui concerne les conditions qui rendent possible notre expérience et notre connaissance[cite: 4].", isCorrect: true, rationale: "Parfait ! La conscience unifie nos expériences diverses dans un même « je »[cite: 4, 8]." },
+                    { text: "La séparation radicale entre la matière du corps et l'esprit pensant[cite: 2].", isCorrect: false, rationale: "C'est le dualisme[cite: 2, 9]." },
+                    { text: "Le fait d'être un empire dans un empire au sein de la nature[cite: 10].", isCorrect: false, rationale: "C'est l'illusion rejetée par Spinoza[cite: 10]." },
+                    { text: "La pitié et la compassion naturelle chez l'Homme[cite: 6].", isCorrect: false, rationale: "Ce sont les sentiments analysés par Rousseau[cite: 6]." }
                 ]
             },
             {
                 category: "Définition vers Notion",
-                question: "Quelle notion désigne le fait d'être une seule et même personne malgré la diversité de ses expériences ?",
+                question: "Quelle notion désigne le fait d'être une seule et même personne malgré la diversité des vécus[cite: 4]?",
                 options: [
-                    { text: "L'identité", isCorrect: true, rationale: "Exact ! La conscience permet à l'individu de se reconnaître comme le même « je » à travers le temps." },
-                    { text: "La subjectivité", isCorrect: false, rationale: "C'est le point de vue personnel sur le monde." },
-                    { text: "La responsabilité", isCorrect: false, rationale: "C'est le fait de pouvoir répondre de ses actes." },
-                    { text: "Le cogito", isCorrect: false, rationale: "C'est la certitude de l'existence par la pensée." }
+                    { text: "L'identité[cite: 4]", isCorrect: true, rationale: "Exact ! La conscience permet à l'individu de se reconnaître comme le même « je »[cite: 4]." },
+                    { text: "La subjectivité[cite: 2]", isCorrect: false, rationale: "C'est la perception personnelle du monde[cite: 2]." },
+                    { text: "La responsabilité[cite: 4]", isCorrect: false, rationale: "C'est la capacité de répondre de ses actes[cite: 4]." },
+                    { text: "Le cogito[cite: 4]", isCorrect: false, rationale: "C'est la certitude de l'existence par la pensée[cite: 4, 9]." }
                 ]
             },
             {
                 category: "Définition vers Notion",
-                question: "Qu'est-ce que la 'responsabilité' en lien avec la conscience ?",
+                question: "Qu'est-ce que la 'responsabilité' selon le cours[cite: 4]?",
                 options: [
-                    { text: "Le fait de pouvoir répondre de ses actes, car être conscient de ses actions permet d'en être considéré comme responsable.", isCorrect: true, rationale: "Parfait ! La conscience est la condition indispensable pour assumer ses actes." },
-                    { text: "La capacité de juger si une action est moralement bien ou mal.", isCorrect: false, rationale: "C'est la conscience morale." },
-                    { text: "Le sentiment de compassion et de pitié naturelle.", isCorrect: false, rationale: "C'est la description de l'homme par Rousseau." },
-                    { text: "L'appartenance de l'Homme à la nature.", isCorrect: false, rationale: "C'est le monisme spinoziste." }
+                    { text: "Le fait de pouvoir répondre de ses actes, la conscience permettant d'en être considéré comme responsable[cite: 4].", isCorrect: true, rationale: "Parfait ! Être conscient de ses actions permet d'en assumer les conséquences[cite: 4]." },
+                    { text: "La faculté de juger si une action est moralement bonne ou mauvaise[cite: 1].", isCorrect: false, rationale: "C'est la conscience morale[cite: 1]." },
+                    { text: "Le sentiment de compassion et d'innocuité naturelle[cite: 6].", isCorrect: false, rationale: "C'est la description de l'homme par Rousseau[cite: 6]." },
+                    { text: "L'obligation d'avoir une réflexion critique sur sa propre pensée[cite: 5].", isCorrect: false, rationale: "C'est la démarche de Gramsci[cite: 5]." }
                 ]
             },
-            // Auteurs spécifiques
+
+            // --- SECTION 2 : AUTEURS & PENSEURS ---
+            // Gramsci
             {
-                category: "Auteur & Pensée (Gramsci)",
-                question: "Que pense Gramsci de la conscience, de la philosophie et du 'sens commun' ?",
+                category: "Auteur : Gramsci",
+                question: "Que pense Gramsci de la philosophie et de la conscience[cite: 5]?",
                 options: [
-                    { text: "Nous sommes tous des philosophes de manière inconsciente via notre milieu social ; il faut développer un esprit critique pour devenir acteur de sa vie.", isCorrect: true, rationale: "Exact ! La philosophie n'est pas réservée aux spécialistes, elle habite notre langage et nos croyances quotidiennes." },
-                    { text: "La conscience est un privilège divin et sacré qui place l'Homme au sommet absolu de la nature.", isCorrect: false, rationale: "C'est exactement ce que Nietzsche remet en question." },
-                    { text: "L'être humain est naturellement bon mais est totalement corrompu par la civilisation.", isCorrect: false, rationale: "C'est la thèse de Rousseau." },
-                    { text: "La seule certitude incontestable est obtenue par le doute méthodique de chaque chose.", isCorrect: false, rationale: "C'est la démarche de Descartes." }
-                ]
-            },
-            {
-                category: "Auteur & Pensée (Rousseau)",
-                question: "Quelle est la vision de Rousseau concernant la nature humaine et la conscience morale ?",
-                options: [
-                    { text: "L'Homme naturel est fondamentalement bon et innocent, doté d'une conscience morale et de compassion, mais la société peut le corrompre.", isCorrect: true, rationale: "Parfait ! Rousseau note une contradiction : l'Homme sait ce qui est bien grâce à sa conscience, mais n'agit pas toujours en conformité." },
-                    { text: "L'Homme est misérable physiquement mais grand par sa conscience intellectuelle.", isCorrect: false, rationale: "C'est l'analyse de Pascal." },
-                    { text: "L'Homme fait partie de la nature et n'est pas un empire dans un empire.", isCorrect: false, rationale: "C'est la définition du monisme selon Spinoza." },
-                    { text: "La conscience n'a rien de sacré et trouve son origine dans les simples échanges sociaux.", isCorrect: false, rationale: "C'est la pensée de Nietzsche." }
+                    { text: "Nous sommes tous des philosophes de façon inconsciente via notre milieu social ; il faut développer un esprit critique[cite: 5].", isCorrect: true, rationale: "Exact ! La philosophie n'est pas réservée aux spécialistes : elle habite notre langage et notre sens commun[cite: 5]." },
+                    { text: "La philosophie est un privilège métaphysique réservé exclusivement à une élite de savants[cite: 5].", isCorrect: false, rationale: "C'est l'exact inverse : il affirme qu'elle existe déjà dans la vie de tout le monde[cite: 5]." },
+                    { text: "La conscience est un don divin qui s'affranchit totalement du milieu social[cite: 11].", isCorrect: false, rationale: "C'est la vision traditionnelle que rejettent Gramsci et Nietzsche[cite: 5, 11]." },
+                    { text: "Le corps et l'esprit constituent deux substances rigoureusement séparées[cite: 2].", isCorrect: false, rationale: "C'est le dualisme de Descartes[cite: 2, 9]." }
                 ]
             },
             {
-                category: "Auteur & Pensée (Pascal)",
-                question: "Comment Pascal caractérise-t-il la condition humaine ?",
+                category: "Auteur : Gramsci",
+                question: "Quel est l'objectif de l'individu selon l'analyse de Gramsci[cite: 5]?",
                 options: [
-                    { text: "L'Homme est 'misérable' par sa faiblesse physique face à l'univers, mais 'grand' par sa conscience et sa capacité à penser.", isCorrect: true, rationale: "Exact ! Il est physiquement minuscule mais intellectuellement capable de penser sa propre faiblesse." },
-                    { text: "L'Homme unifie toutes ses expériences diverses dans un même « je pense ».", isCorrect: false, rationale: "C'est la théorie de Kant." },
-                    { text: "L'Homme possède le cogito, prouvant de manière absolue son existence pensante.", isCorrect: false, rationale: "C'est Descartes." },
-                    { text: "L'Homme est un être social dont la conscience est issue des relations collectives.", isCorrect: false, rationale: "C'est Nietzsche / Gramsci." }
+                    { text: "Construire une conception du monde personnelle et consciente pour ne plus subir son environnement et devenir acteur[cite: 5].", isCorrect: true, rationale: "Parfait ! Il s'agit de prendre conscience de sa pensée induite pour développer une réflexion critique[cite: 5]." },
+                    { text: "Utiliser le doute méthodique pour atteindre une certitude mathématique absolue[cite: 3].", isCorrect: false, rationale: "C'est la méthode de Descartes[cite: 3, 9]." },
+                    { text: "Relever la faiblesse physique de l'Homme face à l'immensité de l'univers[cite: 7].", isCorrect: false, rationale: "C'est la condition humaine selon Pascal[cite: 7]." },
+                    { text: "Retrouver la bonté de l'état de nature en fuyant la civilisation[cite: 6].", isCorrect: false, rationale: "C'est la pensée de Rousseau[cite: 6]." }
                 ]
             },
             {
-                category: "Auteur & Pensée (Kant)",
-                question: "Quel rôle central Kant attribue-t-il à la conscience dans la construction de l'identité ?",
+                category: "À retenir : Gramsci",
+                question: "Quelle formule résume le mieux l'enseignement de Gramsci[cite: 5]?",
                 options: [
-                    { text: "La conscience unifie toutes nos expériences multiples dans un même « je pense » (sujet unique).", isCorrect: true, rationale: "Parfait ! Malgré la diversité de ce que nous vivons, le « je pense » relie tout et bâtit notre identité." },
-                    { text: "Elle permet de douter de tout pour trouver le cogito ergo sum.", isCorrect: false, rationale: "C'est Descartes." },
-                    { text: "Elle distingue le bien du mal à travers la compassion naturelle.", isCorrect: false, rationale: "C'est Rousseau." },
-                    { text: "Elle réalise que l'Homme fait corps avec la nature (monisme).", isCorrect: false, rationale: "C'est Spinoza." }
+                    { text: "Prendre conscience de sa pensée et développer un esprit critique[cite: 5].", isCorrect: true, rationale: "Exact ! C'est l'essence même de son message sur le sens commun et l'histoire[cite: 5]." },
+                    { text: "Je pense donc je suis[cite: 4, 9].", isCorrect: false, rationale: "C'est la formule du cogito de Descartes[cite: 4, 9]." },
+                    { text: "L'Homme est un roseau pensant, misérable mais grand[cite: 7].", isCorrect: false, rationale: "C'est la synthèse de Pascal[cite: 7]." },
+                    { text: "L'Homme fait partie intégrante de la nature[cite: 3, 10].", isCorrect: false, rationale: "C'est le monisme de Spinoza[cite: 3, 10]." }
+                ]
+            },
+
+            // Rousseau
+            {
+                category: "Auteur : Rousseau",
+                question: "Quelle est la vision de Rousseau sur la nature humaine[cite: 6]?",
+                options: [
+                    { text: "L'être humain naturel est fondamentalement bon et innocent, doté de compassion et de pitié[cite: 6].", isCorrect: true, rationale: "Exact ! Il oppose cette bonté naturelle à la société et à la civilisation qui peuvent le corrompre[cite: 6]." },
+                    { text: "L'Homme est un sujet pensant dont l'esprit surpasse la matière du corps[cite: 2].", isCorrect: false, rationale: "C'est le dualism cartésien[cite: 2, 9]." },
+                    { text: "La conscience humaine trouve son origine brute dans les rapports d'échanges sociaux[cite: 11].", isCorrect: false, rationale: "C'est la thèse de Nietzsche[cite: 11]." },
+                    { text: "L'Homme est par nature un « empire dans un empire » supérieur à la nature[cite: 10].", isCorrect: false, rationale: "C'est l'illusion combattue par Spinoza[cite: 10]." }
                 ]
             },
             {
-                category: "Auteur & Pensée (Descartes)",
-                question: "Quels sont les deux grands piliers de la philosophie de Descartes concernant la conscience ?",
+                category: "Auteur : Rousseau",
+                question: "Quelle contradiction importante Rousseau souligne-t-il concernant la conscience morale[cite: 6]?",
                 options: [
-                    { text: "Le cogito ('Je pense donc je suis') via le doute méthodique, et le dualisme (corps matériel et esprit pensant).", isCorrect: true, rationale: "Exact ! Descartes fonde la certitude de l'existence sur la pensée et sépare clairement corps et esprit." },
-                    { text: "Le monisme et l'appartenance inconditionnelle de l'Homme à la nature.", isCorrect: false, rationale: "C'est le exact opposé, défendu par Spinoza." },
-                    { text: "L'origine sociale de la conscience et le renversement des valeurs traditionnelles.", isCorrect: false, rationale: "C'est Nietzsche." },
-                    { text: "L'unification transcendantale des multiples expériences sensibles.", isCorrect: false, rationale: "C'est Kant." }
+                    { text: "L'Homme peut savoir ce qui est bien grâce à sa conscience, mais ne pas forcément agir conformément à ce qu'il sait[cite: 6].", isCorrect: true, rationale: "Parfait ! La conscience éclaire le bien et le mal, mais la volonté ou la société peuvent dévier l'action[cite: 6]." },
+                    { text: "L'Homme doute de tout méthodiquement tout en étant absolument certain d'exister[cite: 4, 9].", isCorrect: false, rationale: "C'est le paradoxe du cogito chez Descartes[cite: 4, 9]." },
+                    { text: "L'Homme est physiquement minuscule face à l'univers mais géant par sa pensée[cite: 7].", isCorrect: false, rationale: "C'est le constat de Pascal[cite: 7]." },
+                    { text: "L'Homme unifie ses expériences tout en restant totalement inconscient de son identité[cite: 4, 8].", isCorrect: false, rationale: "C'est contredit par la théorie kantienne[cite: 4, 8]." }
                 ]
             },
             {
-                category: "Auteur & Pensée (Spinoza)",
-                question: "Pourquoi Spinoza s'oppose-t-il au dualisme cartésien à travers le monisme ?",
+                category: "À retenir : Rousseau",
+                question: "Quelle phrase résume la pensée de Rousseau[cite: 6]?",
                 options: [
-                    { text: "Pour lui, l'Homme n'est pas un « empire dans un empire » : il fait pleinement partie de la nature.", isCorrect: true, rationale: "Parfait ! L'Homme partage le même ensemble naturel que les autres êtres, rejetant la séparation stricte corps/esprit." },
-                    { text: "Parce que l'Homme est fondamentalement bon et corrompu par la société.", isCorrect: false, rationale: "C'est Rousseau." },
-                    { text: "Parce que la conscience est un privilège divin et sacré supérieur.", isCorrect: false, rationale: "C'est la vision traditionnelle que rejettent Spinoza et Nietzsche." },
-                    { text: "Parce que le doute méthodique est la seule source de vérité absolue.", isCorrect: false, rationale: "C'est la méthode de Descartes." }
+                    { text: "L'Homme naturel est bon ; la société peut le corrompre[cite: 6].", isCorrect: true, rationale: "Exact ! C'est le résumé clé de sa théorie sur la nature et la civilisation[cite: 6]." },
+                    { text: "La conscience n'est ni divine ni sacrée[cite: 11].", isCorrect: false, rationale: "C'est la position de Nietzsche[cite: 11]." },
+                    { text: "La conscience unifie toutes nos expériences dans un même « je »[cite: 8].", isCorrect: false, rationale: "C'est l'assertion de Kant[cite: 8]." },
+                    { text: "L'Homme fait partie de la nature (monisme)[cite: 10].", isCorrect: false, rationale: "C'est l'affirmation de Spinoza[cite: 10]." }
+                ]
+            },
+
+            // Pascal
+            {
+                category: "Auteur : Pascal",
+                question: "Comment Pascal définit-il la misère de l'Homme[cite: 7]?",
+                options: [
+                    { text: "Il est extrêmement petit et faible physiquement lorsqu'on le compare à l'immensité de l'univers[cite: 7].", isCorrect: true, rationale: "Exact ! Sa misère est d'ordre physique et cosmique[cite: 7]." },
+                    { text: "Il est prisonnier des idées reçues de son milieu social sans esprit critique[cite: 5].", isCorrect: false, rationale: "C'est l'analyse de Gramsci[cite: 5]." },
+                    { text: "Il est corrompu dans sa bonté originelle par les artifices de la société[cite: 6].", isCorrect: false, rationale: "C'est l'argument de Rousseau[cite: 6]." },
+                    { text: "Il ignore que son corps et son esprit ne font qu'une seule et même substance[cite: 10].", isCorrect: false, rationale: "C'est l'erreur que relève Spinoza contre le dualisme[cite: 10]." }
                 ]
             },
             {
-                category: "Auteur & Pensée (Nietzsche)",
-                question: "Quelle est la perspective de Nietzsche sur la prétendue supériorité de la conscience ?",
+                category: "Auteur : Pascal",
+                question: "D'où vient la 'grandeur' de l'Homme selon Pascal[cite: 7]?",
                 options: [
-                    { text: "Il rejette son caractère divin ou sacré et relie son origine aux nécessités des échanges et de la vie en société.", isCorrect: true, rationale: "Exact ! Nietzsche opère un renversement des valeurs en montrant que la conscience n'est pas un privilège cosmique absolu." },
-                    { text: "Il soutient qu'elle unifie toutes nos expériences dans un « je pense » transcendantal.", isCorrect: false, rationale: "C'est Kant." },
-                    { text: "Il affirme qu'elle constitue la première certitude absolue du cogito.", isCorrect: false, rationale: "C'est Descartes." },
-                    { text: "Il démontre qu'elle permet à l'Homme de se sentir grand face à l'immensité de l'univers.", isCorrect: false, rationale: "C'est Pascal." }
+                    { text: "Il est conscient de sa propre condition : il sait qu'il est petit et peut penser l'univers[cite: 7].", isCorrect: true, rationale: "Parfait ! C'est une faiblesse physique doublée d'une immense supériorité intellectuelle (il pense sa faiblesse)[cite: 7]." },
+                    { text: "De sa capacité à découvrir le cogito à l'issue du doute méthodique[cite: 4, 9].", isCorrect: false, rationale: "C'est la grandeur intellectuelle selon Descartes[cite: 4, 9]." },
+                    { text: "De sa conscience morale innée qui lui dicte la compassion[cite: 6].", isCorrect: false, rationale: "C'est la vision de Rousseau[cite: 6]." },
+                    { text: "Du fait qu'il unifie toutes ses représentations dans un même « je pense »[cite: 8].", isCorrect: false, rationale: "C'est la structure kantienne[cite: 8]." }
+                ]
+            },
+            {
+                category: "À retenir : Pascal",
+                question: "Quelle formulation résume la condition humaine selon Pascal[cite: 7]?",
+                options: [
+                    { text: "L'Homme est « misérable » par sa faiblesse physique, mais « grand » par sa conscience et sa capacité à penser[cite: 7].", isCorrect: true, rationale: "Exact ! C'est le cœur de sa philosophie de la conscience[cite: 7]." },
+                    { text: "L'Homme est un sujet pensant indépendant de son corps[cite: 2, 9].", isCorrect: false, rationale: "C'est la définition du dualisme cartésien[cite: 2, 9]." },
+                    { text: "La conscience n'est qu'un produit des échanges sociaux sans statut divin[cite: 11].", isCorrect: false, rationale: "C'est l'analyse de Nietzsche[cite: 11]." },
+                    { text: "L'Homme fait partie de la nature et n'est pas un empire dans un empire[cite: 10].", isCorrect: false, rationale: "C'est le monisme de Spinoza[cite: 10]." }
+                ]
+            },
+
+            // Kant
+            {
+                category: "Auteur : Kant",
+                question: "Quel rôle fondamental la conscience joue-t-elle chez Kant[cite: 8]?",
+                options: [
+                    { text: "Elle permet d'unifier toutes nos expériences multiples dans un même « je pense »[cite: 8].", isCorrect: true, rationale: "Exact ! Le « je pense » accompagne nos représentations et bâtit notre identité malgré la diversité des vécus[cite: 8]." },
+                    { text: "Elle permet de douter de tout pour prouver l'existence de l'esprit pensant[cite: 4, 9].", isCorrect: false, rationale: "C'est le rôle du cogito chez Descartes[cite: 4, 9]." },
+                    { text: "Elle sert à distinguer immédiatement le bien du mal grâce à la pitié naturelle[cite: 1, 6].", isCorrect: false, rationale: "C'est la conscience morale, notamment chez Rousseau[cite: 1, 6]." },
+                    { text: "Elle connecte l'individu à l'ensemble de la nature par le monisme[cite: 10].", isCorrect: false, rationale: "C'est la position de Spinoza[cite: 10]." }
+                ]
+            },
+            {
+                category: "À retenir : Kant",
+                question: "Quel est le résumé de la pensée de Kant sur la conscience[cite: 8]?",
+                options: [
+                    { text: "La conscience unifie toutes nos expériences dans un même « je »[cite: 8].", isCorrect: true, rationale: "Parfait ! C'est la clé de voûte de sa théorie de l'identité personnelle[cite: 8]." },
+                    { text: "Conscience -> pensée -> cogito[cite: 9].", isCorrect: false, rationale: "C'est le résumé de Descartes[cite: 9]." },
+                    { text: "L'Homme fait partie de la nature contre le dualisme[cite: 10].", isCorrect: false, rationale: "C'est le résumé de Spinoza[cite: 10]." },
+                    { text: "La conscience n'est ni divine ni sacrée[cite: 11].", isCorrect: false, rationale: "C'est le résumé de Nietzsche[cite: 11]." }
+                ]
+            },
+
+            // Descartes
+            {
+                category: "Auteur : Descartes",
+                question: "Comment Descartes parvient-il à découvrir la première vérité certaine[cite: 9]?",
+                options: [
+                    { text: "En utilisant le doute méthodique pour rejeter tout ce qui est douteux, révélant que le fait de penser prouve l'existence[cite: 9].", isCorrect: true, rationale: "Exact ! C'est le mécanisme du cogito (« Je pense donc je suis »)[cite: 4, 9]." },
+                    { text: "En analysant le sens commun et les croyances inconscientes de sa classe sociale[cite: 5].", isCorrect: false, rationale: "C'est la méthode critique de Gramsci[cite: 5]." },
+                    { text: "En unifiant la multiplicité des sensations à travers le transcendantal[cite: 4, 8].", isCorrect: false, rationale: "C'est la démarche de Kant[cite: 4, 8]." },
+                    { text: "En constatant la misère physique de l'Homme face à l'immensité de l'univers[cite: 7].", isCorrect: false, rationale: "C'est l'approche de Pascal[cite: 7]." }
+                ]
+            },
+            {
+                category: "Auteur : Descartes",
+                question: "Quelle distinction fondamentale Descartes opère-t-il entre le corps et l'esprit[cite: 9]?",
+                options: [
+                    { text: "Le corps est une réalité matérielle appartenant à la nature, tandis que l'esprit est une réalité pensante (le dualisme)[cite: 9].", isCorrect: true, rationale: "Parfait ! Cette dissociation corps/esprit est la base du dualisme cartésien[cite: 2, 9]." },
+                    { text: "Le corps et l'esprit ne forment qu'une seule et même substance naturelle[cite: 10].", isCorrect: false, rationale: "C'est l'opposé exact, soutenu par le monisme de Spinoza[cite: 10]." },
+                    { text: "Le corps est bon par nature alors que l'esprit est corrompu par la société[cite: 6].", isCorrect: false, rationale: "C'est une adaptation erronée de la théorie de Rousseau[cite: 6]." },
+                    { text: "Le corps est un simple produit des échanges sociaux et des interactions collectives[cite: 11].", isCorrect: false, rationale: "C'est l'origine sociale de la conscience selon Nietzsche[cite: 11]." }
+                ]
+            },
+            {
+                category: "À retenir : Descartes",
+                question: "Quels mots-clés résument la doctrine de Descartes[cite: 9]?",
+                options: [
+                    { text: "Conscience -> pensée -> cogito ; corps et esprit distincts -> dualisme[cite: 9].", isCorrect: true, rationale: "Exact ! C'est le résumé officiel de la fiche de révision[cite: 9]." },
+                    { text: "L'Homme fait partie de la nature -> opposition au dualisme -> monisme[cite: 10].", isCorrect: false, rationale: "C'est le résumé de Spinoza[cite: 10]." },
+                    { text: "L'Homme naturel est bon ; la société le corrompt[cite: 6].", isCorrect: false, rationale: "C'est le résumé de Rousseau[cite: 6]." },
+                    { text: "La conscience unifie toutes nos expériences dans un même « je »[cite: 8].", isCorrect: false, rationale: "C'est le résumé de Kant[cite: 8]." }
+                ]
+            },
+
+            // Spinoza
+            {
+                category: "Auteur : Spinoza",
+                question: "Pourquoi Spinoza refuse-t-il de voir l'Homme comme un « empire dans un empire »[cite: 10]?",
+                options: [
+                    { text: "Parce que l'Homme n'est pas une réalité séparée du reste de la nature : il y fait pleinement partie[cite: 10].", isCorrect: true, rationale: "Exact ! C'est le fondement du monisme spinoziste, s'opposant au dualisme de Descartes[cite: 3, 10]." },
+                    { text: "Parce que l'Homme a été corrompu par les lois artificielles de la civilisation[cite: 6].", isCorrect: false, rationale: "C'est l'argument de Rousseau[cite: 6]." },
+                    { text: "Parce que la conscience humaine tire sa source unique des échanges marchands[cite: 11].", isCorrect: false, rationale: "C'est l'analyse de Nietzsche[cite: 11]." },
+                    { text: "Parce que l'esprit pensant domine souverainement la matière corporelle[cite: 2, 9].", isCorrect: false, rationale: "C'est la vision dualiste rejetée par Spinoza[cite: 2, 9, 10]." }
+                ]
+            },
+            {
+                category: "À retenir : Spinoza",
+                question: "Quel est le résumé de la théorie de Spinoza[cite: 10]?",
+                options: [
+                    { text: "L'Homme fait partie de la nature -> opposition au dualisme -> monisme[cite: 10].", isCorrect: true, rationale: "Parfait ! C'est la synthèse exacte de sa position philosophique[cite: 10]." },
+                    { text: "Conscience -> pensée -> cogito[cite: 9].", isCorrect: false, rationale: "C'est le résumé de Descartes[cite: 9]." },
+                    { text: "La conscience unifie toutes nos expériences dans un même « je »[cite: 8].", isCorrect: false, rationale: "C'est le résumé de Kant[cite: 8]." },
+                    { text: "Prendre conscience de sa pensée et développer un esprit critique[cite: 5].", isCorrect: false, rationale: "C'est le résumé de Gramsci[cite: 5]." }
+                ]
+            },
+
+            // Nietzsche
+            {
+                category: "Auteur : Nietzsche",
+                question: "Comment Nietzsche qualifie-t-il la conscience humaine par rapport aux idées traditionnelles[cite: 11]?",
+                options: [
+                    { text: "Il remet en question son caractère divin, sacré ou supérieur, la jugeant non constitutive d'un privilège cosmique[cite: 11].", isCorrect: true, rationale: "Exact ! Il participe à un renversement des valeurs en déconstruisant son aura sacrée[cite: 11]." },
+                    { text: "Il affirme qu'elle est la source absolue de toute vérité par le cogito cartésien[cite: 4, 9].", isCorrect: false, rationale: "C'est l'exact opposé de sa démarche critique[cite: 9, 11]." },
+                    { text: "Il soutient qu'elle unifie transcendantalement le monde sensible[cite: 4, 8].", isCorrect: false, rationale: "C'est la vision de Kant[cite: 4, 8]." },
+                    { text: "Il en fait l'attribut principal d'une substance spirituelle séparée du corps[cite: 2, 9].", isCorrect: false, rationale: "C'est le dualisme que Nietzsche ne défend pas[cite: 2, 9, 11]." }
+                ]
+            },
+            {
+                category: "Auteur : Nietzsche",
+                question: "Comment Nietzsche explique-t-il l'origine de la conscience[cite: 11]?",
+                options: [
+                    { text: "Elle est notamment liée aux échanges entre les hommes et à la vie en société[cite: 11].", isCorrect: true, rationale: "Parfait ! Elle n'est pas un donné absolu, mais s'explique à partir des relations sociales[cite: 11]." },
+                    { text: "Elle découle d'une révélation métaphysique obtenue par le doute méthodique[cite: 3, 9].", isCorrect: false, rationale: "C'est la méthode de Descartes[cite: 3, 9]." },
+                    { text: "Elle émerge de la pitié et de la bonté naturelle de l'état de nature[cite: 6].", isCorrect: false, rationale: "C'est la description de Rousseau[cite: 6]." },
+                    { text: "Elle est le produit d'une philosophie spontanée enfouie dans le sens commun[cite: 5].", isCorrect: false, rationale: "C'est l'approche de Gramsci[cite: 5]." }
+                ]
+            },
+            {
+                category: "À retenir : Nietzsche",
+                question: "Quelle phrase résume l'analyse de Nietzsche sur la conscience[cite: 11]?",
+                options: [
+                    { text: "La conscience n'est ni divine ni sacrée ; son origine est liée aux échanges entre les hommes[cite: 11].", isCorrect: true, rationale: "Exact ! C'est le résumé clé de sa fiche[cite: 11]." },
+                    { text: "L'Homme naturel est bon ; la société peut le corrompre[cite: 6].", isCorrect: false, rationale: "C'est le résumé de Rousseau[cite: 6]." },
+                    { text: "L'Homme est misérable par sa faiblesse mais grand par sa pensée[cite: 7].", isCorrect: false, rationale: "C'est le résumé de Pascal[cite: 7]." },
+                    { text: "L'Homme fait partie de la nature -> monisme[cite: 10].", isCorrect: false, rationale: "C'est le résumé de Spinoza[cite: 10]." }
                 ]
             }
         ];
@@ -375,7 +519,7 @@
             progressBar.style.width = '100%';
 
             let percentage = Math.round((score / answeredQuestionsCount) * 100);
-            let msg = `Tu as obtenu un score de <span class="font-bold text-indigo-300">${score} / ${answeredQuestionsCount}</span> (${percentage}% de réussite sur l'ensemble des fiches).<br><br>Le mode infini te permet de relancer une nouvelle session avec des questions entièrement rebrassées !`;
+            let msg = `Tu as obtenu un score de <span class="font-bold text-indigo-300">${score} / ${answeredQuestionsCount}</span> (${percentage}% de réussite sur l'ensemble des fiches).<br><br>Le mode infini te permet de relancer une nouvelle session avec un brassage aléatoire complet de toutes les questions !`;
             finalMessage.innerHTML = msg;
         }
 

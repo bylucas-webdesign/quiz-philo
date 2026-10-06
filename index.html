@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giga Quiz Interactif - Philosophie (La Conscience)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-p-4 flex flex-col items-center justify-center min-h-screen">
+
+    <div class="w-full max-w-2xl bg-slate-800 rounded-2xl shadow-2xl p-6 md:p-8 border border-slate-700 m-4">
+        <!-- En-tête -->
+        <div class="flex justify-between items-center mb-6 border-b border-slate-700 pb-4">
+            <h1 class="text-xl md:text-2xl font-bold text-indigo-400">🧠 Giga Quiz : La Conscience</h1>
+            <div id="score-container" class="text-sm font-semibold bg-indigo-900/60 text-indigo-300 px-3 py-1.5 rounded-full border border-indigo-700">
+                Score : <span id="current-score">0</span> / <span id="answered-count">0</span>
+            </div>
+        </div>
+
+        <!-- Zone de progression -->
+        <div class="w-full bg-slate-700 h-2 rounded-full mb-6 overflow-hidden">
+            <div id="progress-bar" class="bg-indigo-500 h-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+
+        <!-- Conteneur du Quiz -->
+        <div id="quiz-container" class="fade-in">
+            <div class="flex justify-between text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+                <span id="question-category">Catégorie</span>
+                <span>Question <span id="question-current">1</span> / <span id="question-total">0</span></span>
+            </div>
+            
+            <h2 id="question-text" class="text-lg md:text-xl font-medium mb-6 text-slate-100"></h2>
+
+            <div id="options-container" class="space-y-3 mb-6">
+                <!-- Les options seront injectées ici -->
+            </div>
+
+            <!-- Explication / Rationale -->
+            <div id="explanation-box" class="hidden p-4 rounded-xl mb-6 text-sm border">
+                <p id="explanation-text" class="font-medium"></p>
+            </div>
+
+            <button id="next-btn" onclick="nextQuestion()" class="hidden w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 px-6 rounded-xl transition duration-200 shadow-lg shadow-indigo-600/30">
+                Question suivante ➔
+            </button>
+        </div>
+
+        <!-- Écran de Fin -->
+        <div id="result-screen" class="hidden text-center py-8 fade-in">
+            <div class="text-5xl mb-4">🏆</div>
+            <h2 class="text-2xl font-bold mb-2 text-indigo-300">Session de révision terminée !</h2>
+            <p id="final-message" class="text-slate-300 mb-6 text-lg"></p>
+            <button onclick="restartQuiz()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 px-8 rounded-xl transition duration-200 shadow-lg shadow-indigo-600/30">
+                🔄 Refaire une session (Mode infini)
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const masterQuizData = [
+            // Définitions & Notions de base
+            {
+                category: "Définition vers Notion",
+                question: "Quelle notion correspond à 'la capacité de se rendre compte de son existence, de penser et de prendre conscience de ses propres pensées' ?",
+                options: [
+                    { text: "La conscience", isCorrect: true, rationale: "Exact ! C'est la définition fondamentale de la conscience selon les fiches." },
+                    { text: "La subjectivité", isCorrect: false, rationale: "Non, la subjectivité désigne plutôt la manière dont un individu perçoit le monde à partir de son point de vue." },
+                    { text: "Le cogito", isCorrect: false, rationale: "Non, le cogito est la première vérité certaine chez Descartes ('Je pense donc je suis')." },
+                    { text: "Le transcendantal", isCorrect: false, rationale: "Non, chez Kant, le transcendantal concerne les conditions rendant possible notre expérience." }
+                ]
+            },
+            {
+                category: "Notion vers Définition",
+                question: "Que désigne précisément la 'conscience morale' d'après les fiches ?",
+                options: [
+                    { text: "La capacité à distinguer le bien du mal et à juger ses propres actions.", isCorrect: true, rationale: "Parfait ! Elle permet de savoir si ce que l'on fait est moralement bien ou mal." },
+                    { text: "La capacité à se reconnaître comme un « je » et sujet de réflexion.", isCorrect: false, rationale: "C'est la définition de la conscience de soi." },
+                    { text: "Le fait de pouvoir répondre de ses actes juridiquement.", isCorrect: false, rationale: "Bien que lié à la responsabilité, la conscience morale se définit par le discernement du bien et du mal." },
+                    { text: "L'unification de toutes nos expériences dans un même moi.", isCorrect: false, rationale: "C'est le rôle attribué à la conscience par Kant." }
+                ]
+            },
+            {
+                category: "Définition vers Notion",
+                question: "Qu'est-ce que la 'subjectivité' selon le cours ?",
+                options: [
+                    { text: "La manière dont un individu perçoit et pense le monde à partir de son propre point de vue (expérience personnelle).", isCorrect: true, rationale: "Exact ! C'est l'expérience personnelle que chacun a du monde." },
+                    { text: "La faculté de distinguer le bien du mal et de juger ses propres actions.", isCorrect: false, rationale: "C'est la conscience morale." },
+                    { text: "Une idée ou une image mentale que l'on se fait de quelque chose.", isCorrect: false, rationale: "C'est la définition d'une représentation." },
+                    { text: "Le fait de pouvoir répondre de ses actes.", isCorrect: false, rationale: "C'est la responsabilité." }
+                ]
+            },
+            {
+                category: "Définition vers Notion",
+                question: "Quelle notion désigne une idée ou une image mentale que l'on se fait de quelque chose ?",
+                options: [
+                    { text: "Une représentation", isCorrect: true, rationale: "Parfait ! Grâce à la conscience, l'être humain peut se représenter le monde, les autres et lui-même." },
+                    { text: "Le sujet", isCorrect: false, rationale: "Non, le sujet est un être capable de penser et de dire 'je'." },
+                    { text: "Le dualisme", isCorrect: false, rationale: "Non, c'est la conception reposant sur deux principes distincts." },
+                    { text: "L'identité", isCorrect: false, rationale: "Non, l'identité désigne le fait d'être une seule et même personne." }
+                ]
+            },
+            {
+                category: "Définition vers Notion",
+                question: "Qu'est-ce qu'un 'sujet' en philosophie ?",
+                options: [
+                    { text: "Un être capable de penser, de prendre conscience de lui-même et de dire « je ».", isCorrect: true, rationale: "Exact ! Il s'oppose à la simple chose qui ne possède pas cette conscience." },
+                    { text: "Une conception selon laquelle la réalité repose sur un seul principe.", isCorrect: false, rationale: "C'est la définition du monisme." },
+                    { text: "La méthode pour rechercher une vérité absolument certaine par le doute.", isCorrect: false, rationale: "C'est le doute méthodique." },
+                    { text: "Le fait d'être une seule et même personne malgré la diversité des expériences.", isCorrect: false, rationale: "C'est l'identité." }
+                ]
+            },
+            {
+                category: "Distinction philosophique",
+                question: "Qu'appelle-t-on le 'dualisme' (notamment chez Descartes) ?",
+                options: [
+                    { text: "Une conception où la réalité repose sur deux principes distincts : le corps (matériel) et l'esprit (pensant).", isCorrect: true, rationale: "Correct ! Le corps appartient à la nature et l'esprit est une réalité pensante." },
+                    { text: "Une conception reposant sur un seul principe ou une seule substance.", isCorrect: false, rationale: "C'est le monisme (Spinoza)." },
+                    { text: "Le fait de placer l'être humain au centre de la nature.", isCorrect: false, rationale: "C'est l'anthropocentrisme." },
+                    { text: "La condition qui rend possible notre expérience et notre connaissance.", isCorrect: false, rationale: "C'est le transcendantal chez Kant." }
+                ]
+            },
+            {
+                category: "Distinction philosophique",
+                question: "Qu'est-ce que le 'monisme' (notamment chez Spinoza) par opposition au dualisme ?",
+                options: [
+                    { text: "Une conception selon laquelle la réalité repose sur un seul principe ou une seule substance.", isCorrect: true, rationale: "Exact ! Chez Spinoza, l'Homme n'est pas séparé de la nature, il en fait partie." },
+                    { text: "La distinction rigoureuse entre le corps matériel et l'esprit pensant.", isCorrect: false, rationale: "C'est le dualisme cartésien." },
+                    { text: "L'obligation de douter méthodiquement de toutes nos connaissances.", isCorrect: false, rationale: "C'est le doute méthodique de Descartes." },
+                    { text: "La capacité d'unifier toutes nos expériences dans un même « je ».", isCorrect: false, rationale: "C'est la définition de la conscience unifiante chez Kant." }
+                ]
+            },
+            {
+                category: "Définition vers Notion",
+                question: "Qu'est-ce que l''anthropocentrisme' ?",
+                options: [
+                    { text: "Une conception qui place l'être humain au centre et lui attribue une place privilégiée dans la nature.", isCorrect: true, rationale: "Parfait ! Elle est remise en question lorsque l'on réalise que l'Homme appartient lui-même à la nature." },
+                    { text: "Le fait que la conscience découle uniquement des échanges sociaux.", isCorrect: false, rationale: "C'est l'analyse de Nietzsche." },
+                    { text: "La capacité de répondre de ses actes.", isCorrect: false, rationale: "C'est la responsabilité." },
+                    { text: "La conscience de soi en tant que sujet unique.", isCorrect: false, rationale: "C'est l'identité." }
+                ]
+            },
+            {
+                category: "Notion vers Définition",
+                question: "En quoi consiste le 'doute méthodique' chez Descartes ?",
+                options: [
+                    { text: "Remettre volontairement en doute tout ce qui peut l'être afin de trouver une vérité indubitable.", isCorrect: true, rationale: "Correct ! C'est la méthode pour rechercher une vérité absolument certaine." },
+                    { text: "Accepter passivement toutes les idées issues de notre milieu social et du sens commun.", isCorrect: false, rationale: "C'est l'inverse, c'est ce que Gramsci critique." },
+                    { text: "Affirmer que le corps et l'esprit ne font qu'un dans la nature.", isCorrect: false, rationale: "C'est le monisme de Spinoza." },
+                    { text: "Douter de la moralité de ses propres actions.", isCorrect: false, rationale: "Cela relève de la conscience morale." }
+                ]
+            },
+            {
+                category: "Notion vers Définition",
+                question: "Qu'est-ce que le 'cogito' chez Descartes ?",
+                options: [
+                    { text: "La première vérité certaine : 'Je pense donc je suis' (le fait de penser prouve mon existence).", isCorrect: true, rationale: "Exact ! Même en doutant de tout, je ne peux pas douter du fait que je suis en train de penser." },
+                    { text: "La conscience morale permettant de distinguer le bien du mal.", isCorrect: false, rationale: "Non, le cogito est purement épistémologique et métaphysique (la certitude du sujet pensant)." },
+                    { text: "L'unification de toutes nos expériences sensibles.", isCorrect: false, rationale: "C'est le rôle du transcendantal chez Kant." },
+                    { text: "L'illusion d'une conscience divine ou sacrée.", isCorrect: false, rationale: "C'est la critique de Nietzsche." }
+                ]
+            },
+            {
+                category: "Notion vers Définition",
+                question: "Que désigne le 'transcendantal' chez Kant ?",
+                options: [
+                    { text: "Ce qui concerne les conditions qui rendent possible notre expérience et notre connaissance (unifier la multiplicité dans un 'je').", isCorrect: true, rationale: "Parfait ! La conscience unifie toutes nos expériences diverses dans un même sujet." },
+                    { text: "La séparation radicale entre la matière corporelle et l'esprit.", isCorrect: false, rationale: "C'est le dualisme." },
+                    { text: "Le fait d'être un 'empire dans un empire' au-dessus de la nature.", isCorrect: false, rationale: "C'est l'illusion que combat Spinoza." },
+                    { text: "La pitié et la compassion naturelle chez l'Homme.", isCorrect: false, rationale: "Ce sont les sentiments évoqués par Rousseau." }
+                ]
+            },
+            {
+                category: "Définition vers Notion",
+                question: "Quelle notion désigne le fait d'être une seule et même personne malgré la diversité de ses expériences ?",
+                options: [
+                    { text: "L'identité", isCorrect: true, rationale: "Exact ! La conscience permet à l'individu de se reconnaître comme le même « je » à travers le temps." },
+                    { text: "La subjectivité", isCorrect: false, rationale: "C'est le point de vue personnel sur le monde." },
+                    { text: "La responsabilité", isCorrect: false, rationale: "C'est le fait de pouvoir répondre de ses actes." },
+                    { text: "Le cogito", isCorrect: false, rationale: "C'est la certitude de l'existence par la pensée." }
+                ]
+            },
+            {
+                category: "Définition vers Notion",
+                question: "Qu'est-ce que la 'responsabilité' en lien avec la conscience ?",
+                options: [
+                    { text: "Le fait de pouvoir répondre de ses actes, car être conscient de ses actions permet d'en être considéré comme responsable.", isCorrect: true, rationale: "Parfait ! La conscience est la condition indispensable pour assumer ses actes." },
+                    { text: "La capacité de juger si une action est moralement bien ou mal.", isCorrect: false, rationale: "C'est la conscience morale." },
+                    { text: "Le sentiment de compassion et de pitié naturelle.", isCorrect: false, rationale: "C'est la description de l'homme par Rousseau." },
+                    { text: "L'appartenance de l'Homme à la nature.", isCorrect: false, rationale: "C'est le monisme spinoziste." }
+                ]
+            },
+            // Auteurs spécifiques
+            {
+                category: "Auteur & Pensée (Gramsci)",
+                question: "Que pense Gramsci de la conscience, de la philosophie et du 'sens commun' ?",
+                options: [
+                    { text: "Nous sommes tous des philosophes de manière inconsciente via notre milieu social ; il faut développer un esprit critique pour devenir acteur de sa vie.", isCorrect: true, rationale: "Exact ! La philosophie n'est pas réservée aux spécialistes, elle habite notre langage et nos croyances quotidiennes." },
+                    { text: "La conscience est un privilège divin et sacré qui place l'Homme au sommet absolu de la nature.", isCorrect: false, rationale: "C'est exactement ce que Nietzsche remet en question." },
+                    { text: "L'être humain est naturellement bon mais est totalement corrompu par la civilisation.", isCorrect: false, rationale: "C'est la thèse de Rousseau." },
+                    { text: "La seule certitude incontestable est obtenue par le doute méthodique de chaque chose.", isCorrect: false, rationale: "C'est la démarche de Descartes." }
+                ]
+            },
+            {
+                category: "Auteur & Pensée (Rousseau)",
+                question: "Quelle est la vision de Rousseau concernant la nature humaine et la conscience morale ?",
+                options: [
+                    { text: "L'Homme naturel est fondamentalement bon et innocent, doté d'une conscience morale et de compassion, mais la société peut le corrompre.", isCorrect: true, rationale: "Parfait ! Rousseau note une contradiction : l'Homme sait ce qui est bien grâce à sa conscience, mais n'agit pas toujours en conformité." },
+                    { text: "L'Homme est misérable physiquement mais grand par sa conscience intellectuelle.", isCorrect: false, rationale: "C'est l'analyse de Pascal." },
+                    { text: "L'Homme fait partie de la nature et n'est pas un empire dans un empire.", isCorrect: false, rationale: "C'est la définition du monisme selon Spinoza." },
+                    { text: "La conscience n'a rien de sacré et trouve son origine dans les simples échanges sociaux.", isCorrect: false, rationale: "C'est la pensée de Nietzsche." }
+                ]
+            },
+            {
+                category: "Auteur & Pensée (Pascal)",
+                question: "Comment Pascal caractérise-t-il la condition humaine ?",
+                options: [
+                    { text: "L'Homme est 'misérable' par sa faiblesse physique face à l'univers, mais 'grand' par sa conscience et sa capacité à penser.", isCorrect: true, rationale: "Exact ! Il est physiquement minuscule mais intellectuellement capable de penser sa propre faiblesse." },
+                    { text: "L'Homme unifie toutes ses expériences diverses dans un même « je pense ».", isCorrect: false, rationale: "C'est la théorie de Kant." },
+                    { text: "L'Homme possède le cogito, prouvant de manière absolue son existence pensante.", isCorrect: false, rationale: "C'est Descartes." },
+                    { text: "L'Homme est un être social dont la conscience est issue des relations collectives.", isCorrect: false, rationale: "C'est Nietzsche / Gramsci." }
+                ]
+            },
+            {
+                category: "Auteur & Pensée (Kant)",
+                question: "Quel rôle central Kant attribue-t-il à la conscience dans la construction de l'identité ?",
+                options: [
+                    { text: "La conscience unifie toutes nos expériences multiples dans un même « je pense » (sujet unique).", isCorrect: true, rationale: "Parfait ! Malgré la diversité de ce que nous vivons, le « je pense » relie tout et bâtit notre identité." },
+                    { text: "Elle permet de douter de tout pour trouver le cogito ergo sum.", isCorrect: false, rationale: "C'est Descartes." },
+                    { text: "Elle distingue le bien du mal à travers la compassion naturelle.", isCorrect: false, rationale: "C'est Rousseau." },
+                    { text: "Elle réalise que l'Homme fait corps avec la nature (monisme).", isCorrect: false, rationale: "C'est Spinoza." }
+                ]
+            },
+            {
+                category: "Auteur & Pensée (Descartes)",
+                question: "Quels sont les deux grands piliers de la philosophie de Descartes concernant la conscience ?",
+                options: [
+                    { text: "Le cogito ('Je pense donc je suis') via le doute méthodique, et le dualisme (corps matériel et esprit pensant).", isCorrect: true, rationale: "Exact ! Descartes fonde la certitude de l'existence sur la pensée et sépare clairement corps et esprit." },
+                    { text: "Le monisme et l'appartenance inconditionnelle de l'Homme à la nature.", isCorrect: false, rationale: "C'est le exact opposé, défendu par Spinoza." },
+                    { text: "L'origine sociale de la conscience et le renversement des valeurs traditionnelles.", isCorrect: false, rationale: "C'est Nietzsche." },
+                    { text: "L'unification transcendantale des multiples expériences sensibles.", isCorrect: false, rationale: "C'est Kant." }
+                ]
+            },
+            {
+                category: "Auteur & Pensée (Spinoza)",
+                question: "Pourquoi Spinoza s'oppose-t-il au dualisme cartésien à travers le monisme ?",
+                options: [
+                    { text: "Pour lui, l'Homme n'est pas un « empire dans un empire » : il fait pleinement partie de la nature.", isCorrect: true, rationale: "Parfait ! L'Homme partage le même ensemble naturel que les autres êtres, rejetant la séparation stricte corps/esprit." },
+                    { text: "Parce que l'Homme est fondamentalement bon et corrompu par la société.", isCorrect: false, rationale: "C'est Rousseau." },
+                    { text: "Parce que la conscience est un privilège divin et sacré supérieur.", isCorrect: false, rationale: "C'est la vision traditionnelle que rejettent Spinoza et Nietzsche." },
+                    { text: "Parce que le doute méthodique est la seule source de vérité absolue.", isCorrect: false, rationale: "C'est la méthode de Descartes." }
+                ]
+            },
+            {
+                category: "Auteur & Pensée (Nietzsche)",
+                question: "Quelle est la perspective de Nietzsche sur la prétendue supériorité de la conscience ?",
+                options: [
+                    { text: "Il rejette son caractère divin ou sacré et relie son origine aux nécessités des échanges et de la vie en société.", isCorrect: true, rationale: "Exact ! Nietzsche opère un renversement des valeurs en montrant que la conscience n'est pas un privilège cosmique absolu." },
+                    { text: "Il soutient qu'elle unifie toutes nos expériences dans un « je pense » transcendantal.", isCorrect: false, rationale: "C'est Kant." },
+                    { text: "Il affirme qu'elle constitue la première certitude absolue du cogito.", isCorrect: false, rationale: "C'est Descartes." },
+                    { text: "Il démontre qu'elle permet à l'Homme de se sentir grand face à l'immensité de l'univers.", isCorrect: false, rationale: "C'est Pascal." }
+                ]
+            }
+        ];
+
+        let quizData = [];
+        let currentIndex = 0;
+        let score = 0;
+        let answeredQuestionsCount = 0;
+        let answered = false;
+
+        const totalQuestionsEl = document.getElementById('question-total');
+        const currentQuestionEl = document.getElementById('question-current');
+        const currentScoreEl = document.getElementById('current-score');
+        const answeredCountEl = document.getElementById('answered-count');
+        const progressBar = document.getElementById('progress-bar');
+        const categoryEl = document.getElementById('question-category');
+        const questionTextEl = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationBox = document.getElementById('explanation-box');
+        const explanationText = document.getElementById('explanation-text');
+        const nextBtn = document.getElementById('next-btn');
+        const quizContainer = document.getElementById('quiz-container');
+        const resultScreen = document.getElementById('result-screen');
+        const finalMessage = document.getElementById('final-message');
+
+        function initQuiz() {
+            // Copie et mélange aléatoire de TOUTES les questions pour le mode infini/complet
+            quizData = [...masterQuizData].sort(() => Math.random() - 0.5);
+            currentIndex = 0;
+            score = 0;
+            answeredQuestionsCount = 0;
+            
+            currentScoreEl.textContent = score;
+            answeredCountEl.textContent = answeredQuestionsCount;
+            totalQuestionsEl.textContent = quizData.length;
+            
+            resultScreen.classList.add('hidden');
+            quizContainer.classList.remove('hidden');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            answered = false;
+            explanationBox.classList.add('hidden');
+            nextBtn.classList.add('hidden');
+            
+            const currentData = quizData[currentIndex];
+            currentQuestionEl.textContent = currentIndex + 1;
+            categoryEl.textContent = currentData.category;
+            questionTextEl.textContent = currentData.question;
+            
+            progressBar.style.width = `${(currentIndex / quizData.length) * 100}%`;
+
+            // Mélanger les options pour éviter les biais de position
+            const shuffledOptions = [...currentData.options].sort(() => Math.random() - 0.5);
+
+            optionsContainer.innerHTML = '';
+            shuffledOptions.forEach((option) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-xl bg-slate-700/60 hover:bg-slate-700 border border-slate-600 transition duration-200 text-slate-200 font-medium text-sm md:text-base";
+                btn.textContent = option.text;
+                btn.onclick = () => selectOption(btn, option, currentData.options);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectOption(selectedBtn, selectedOption, allOptions) {
+            if (answered) return;
+            answered = true;
+            answeredQuestionsCount++;
+            answeredCountEl.textContent = answeredQuestionsCount;
+
+            const buttons = optionsContainer.children;
+            for (let btn of buttons) {
+                btn.disabled = true;
+                const optText = btn.textContent;
+                const originalOpt = allOptions.find(o => o.text === optText);
+                
+                if (originalOpt.isCorrect) {
+                    btn.classList.remove('bg-slate-700/60', 'border-slate-600');
+                    btn.classList.add('bg-emerald-900/60', 'border-emerald-500', 'text-emerald-200');
+                } else if (btn === selectedBtn) {
+                    btn.classList.remove('bg-slate-700/60', 'border-slate-600');
+                    btn.classList.add('bg-rose-900/60', 'border-rose-500', 'text-rose-200');
+                }
+            }
+
+            if (selectedOption.isCorrect) {
+                score++;
+                currentScoreEl.textContent = score;
+            }
+
+            explanationText.textContent = selectedOption.rationale;
+            explanationBox.className = `p-4 rounded-xl mb-6 text-sm border ${selectedOption.isCorrect ? 'bg-emerald-950/50 border-emerald-700 text-emerald-200' : 'bg-rose-950/50 border-rose-700 text-rose-200'}`;
+            explanationBox.classList.remove('hidden');
+            nextBtn.classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentIndex++;
+            if (currentIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            quizContainer.classList.add('hidden');
+            resultScreen.classList.remove('hidden');
+            progressBar.style.width = '100%';
+
+            let percentage = Math.round((score / answeredQuestionsCount) * 100);
+            let msg = `Tu as obtenu un score de <span class="font-bold text-indigo-300">${score} / ${answeredQuestionsCount}</span> (${percentage}% de réussite sur l'ensemble des fiches).<br><br>Le mode infini te permet de relancer une nouvelle session avec des questions entièrement rebrassées !`;
+            finalMessage.innerHTML = msg;
+        }
+
+        function restartQuiz() {
+            initQuiz();
+        }
+
+        // Lancement initial du quiz complet
+        initQuiz();
+    </script>
+</body>
+</html>
